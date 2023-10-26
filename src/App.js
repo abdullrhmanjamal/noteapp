@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Layout from  './Components/Layout/Layout'
+import NotFound from  './Components/NotFound/NotFound'
+import Regter from  './Components/Regster/Regster'
+import Login from  './Components/Login/Login'
+import { Navigate, RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom';
+import Notes from './Components/Notes/Notes';
+
+
 
 function App() {
+let routers= createHashRouter([
+  {path:'', element:<Layout/>, children:[
+    {path:'', element: <Navigate to={'regster'}/>},
+    {path:'login',element:<Login/>},
+    {path:'regster',element:<Regter/>},
+    {path:'notes',element:<Notes/>},
+    {path:'*',element:<NotFound/>}
+    
+  ]}])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+
+    <RouterProvider router={routers}/>
+    
+
+    </>
+    
+  )
 }
 
 export default App;
